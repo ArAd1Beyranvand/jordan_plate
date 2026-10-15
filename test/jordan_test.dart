@@ -26,30 +26,26 @@ void main() {
     }
   });
 
-  test('car plates have two code and five serial cells', () {
-    expect(JordanPlates.private.slots.length, 7);
-    expect(JordanPlates.motorcycle.slots.length, 6);
+  test('a plate is a code and a serial', () {
+    expect(JordanPlates.private.slots.length, 2);
+    expect(JordanPlates.motorcycle.slots.length, 2);
+    final serial = JordanPlates.private.slots[1];
+    expect(serial.length, 5);
+    expect(serial.isComplete('7'), isTrue);
+    expect(serial.isFull('7'), isFalse);
+    expect(serial.accepts('123456'), isFalse);
   });
 
   test('validator', () {
+    expect(judge(JordanPlates.private, ['21', '30000']).isValid, isTrue);
+    expect(judge(JordanPlates.private, ['21', '7']).isValid, isTrue);
     expect(
-      judge(JordanPlates.private, ['2', '1', '3', '0', '0', '0', '0']).isValid,
-      isTrue,
-    );
-    expect(
-      judge(JordanPlates.private, ['2', '1', null, null, null, null, '7'])
-          .isValid,
-      isTrue,
-    );
-    expect(
-      judge(JordanPlates.private, [null, null, '1', '2', '3', '4', '5'])
-          .isValid,
+      judge(JordanPlates.private, [null, '12345']).isValid,
       isFalse,
       reason: 'no code',
     );
     expect(
-      judge(JordanPlates.private, ['6', '0', '1', null, null, null, null])
-          .isValid,
+      judge(JordanPlates.private, ['60', '1']).isValid,
       isFalse,
       reason: '60 is not a private code',
     );

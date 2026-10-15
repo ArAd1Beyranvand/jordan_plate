@@ -25,39 +25,21 @@ void main() {
   });
 
   final cases = <String, (PlateSpec, List<String?>)>{
-    'private': (JordanPlates.private, ['1', '0', '2', '3', '4', '5', '6']),
-    'transport': (JordanPlates.transport, ['6', '0', '2', '3', '4', '5', '6']),
-    'rental': (JordanPlates.rental, ['7', '0', '2', '3', '4', '5', '6']),
-    'trailer': (JordanPlates.trailer, ['7', '1', '2', '3', '4', '5', '6']),
-    'temporary': (JordanPlates.temporary, [null, '8', '2', '3', '4', '5', '6']),
-    'executive': (
-      JordanPlates.executive,
-      ['P', 'M', null, null, null, null, '1'],
-    ),
-    'legislative': (
-      JordanPlates.legislative,
-      ['P', 'R', null, null, null, null, '1'],
-    ),
-    'judicial': (
-      JordanPlates.judicial,
-      ['J', 'C', null, null, null, null, '1'],
-    ),
-    'governmental': (
-      JordanPlates.governmental,
-      ['G', 'V', null, null, null, '1', null],
-    ),
-    'aqaba': (JordanPlates.aqaba, ['A', 'Q', null, null, null, '1', null]),
-    'diplomatic': (
-      JordanPlates.diplomatic,
-      ['C', 'D', null, null, null, '1', null],
-    ),
-    'police': (JordanPlates.police, ['9', '9', '2', '3', '4', '5', '6']),
-    'ambulance': (JordanPlates.ambulance, ['9', '5', '2', '3', '4', '5', '6']),
-    'gendarmerie': (
-      JordanPlates.gendarmerie,
-      ['9', '6', '2', '3', '4', '5', '6'],
-    ),
-    'motorcycle': (JordanPlates.motorcycle, ['4', '6', '1', '2', '3', '5']),
+    'private': (JordanPlates.private, ['10', '23456']),
+    'transport': (JordanPlates.transport, ['60', '23456']),
+    'rental': (JordanPlates.rental, ['70', '23456']),
+    'trailer': (JordanPlates.trailer, ['71', '23456']),
+    'temporary': (JordanPlates.temporary, ['8', '23456']),
+    'executive': (JordanPlates.executive, ['PM', '1']),
+    'legislative': (JordanPlates.legislative, ['PR', '1']),
+    'judicial': (JordanPlates.judicial, ['JC', '1']),
+    'governmental': (JordanPlates.governmental, ['GV', '1']),
+    'aqaba': (JordanPlates.aqaba, ['AQ', '1']),
+    'diplomatic': (JordanPlates.diplomatic, ['CD', '1']),
+    'police': (JordanPlates.police, ['99', '23456']),
+    'ambulance': (JordanPlates.ambulance, ['95', '23456']),
+    'gendarmerie': (JordanPlates.gendarmerie, ['96', '23456']),
+    'motorcycle': (JordanPlates.motorcycle, ['46', '1235']),
   };
 
   for (final e in cases.entries) {

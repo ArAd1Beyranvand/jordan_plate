@@ -37,8 +37,8 @@ abstract final class _Layout {
   /// and 207.7-219.9 (white artwork).
   static const PlateBox dash = PlateBox(206, 50.5, 14.4, 11);
 
-  /// Five serial cells ending at 511, so the last centre is 483 as on the
-  /// photographed plate. A shorter serial is right-aligned.
+  /// A serial field of five cells ending at 511, so the last centre is 483 as on the
+  /// photographed plate. A shorter serial is centred in its box.
   static const double serialRight = 511;
   static const int serialMax = 5;
 
@@ -144,32 +144,37 @@ abstract final class JordanPlates {
     ),
   ];
 
-  /// The code, then the serial, as slots 0-1 and 2-6.
-  static List<PlateSlot> _slots(PlateAlphabet code, int serialDigits) =>
-      <PlateSlot>[
-        ...plateRegister(
-          alphabet: code,
-          count: 2,
-          left: _Layout.codeLeft,
-          top: _Layout.cellTop,
-          width: _Layout.pitch,
-          height: _Layout.cellHeight,
-        ),
-        ...plateRegister(
-          alphabet: JordanAlphabets.digits,
-          count: serialDigits,
-          left: _Layout.serialRight - serialDigits * _Layout.pitch,
-          top: _Layout.cellTop,
-          width: _Layout.pitch,
-          height: _Layout.cellHeight,
-        ),
-      ];
+  /// The code, then the serial, as slots 0 and 1. A digit code may be one
+  /// digit, a letter code is two; the serial is one to [serialMax] digits,
+  /// right-aligned in its box.
+  static List<PlateSlot> _slots(PlateAlphabet code) => <PlateSlot>[
+    PlateSlot(
+      alphabet: code,
+      box: const PlateBox(
+        _Layout.codeLeft,
+        _Layout.cellTop,
+        2 * _Layout.pitch,
+        _Layout.cellHeight,
+      ),
+      length: 2,
+      minLength: code == JordanAlphabets.digits ? 1 : 2,
+    ),
+    const PlateSlot(
+      alphabet: JordanAlphabets.digits,
+      box: PlateBox(
+        _Layout.serialRight - _Layout.serialMax * _Layout.pitch,
+        _Layout.cellTop,
+        _Layout.serialMax * _Layout.pitch,
+        _Layout.cellHeight,
+      ),
+      length: _Layout.serialMax,
+      minLength: 1,
+    ),
+  ];
 
-  static List<PlateTextGroup> _groups(int serialDigits) => <PlateTextGroup>[
-    const PlateTextGroup(<int>[0, 1], key: 'code'),
-    PlateTextGroup(<int>[
-      for (var i = 0; i < serialDigits; i++) 2 + i,
-    ], prefix: '-', key: 'serial'),
+  static const List<PlateTextGroup> _groups = <PlateTextGroup>[
+    PlateTextGroup(<int>[0], key: 'code'),
+    PlateTextGroup(<int>[1], prefix: '-', key: 'serial'),
   ];
 
   /// The shared plate. [country] is the strip (or [JordanCountry.plain] for
@@ -181,7 +186,6 @@ abstract final class JordanPlates {
     required List<PlateLabel> labels,
     PlateAlphabet code = JordanAlphabets.digits,
     bool strip = true,
-    int serialDigits = _Layout.serialMax,
   }) => PlateSpec(
     id: id,
     country: country,
@@ -190,10 +194,10 @@ abstract final class JordanPlates {
     panel: _stripPanel,
     noPanel: !strip,
     background: strip ? _stripBackground : PlateSection.plain,
-    slots: _slots(code, serialDigits),
+    slots: _slots(code),
     rules: const <PlateRule>[PlateRule(box: _Layout.dash)],
     labels: labels,
-    textGroups: _groups(serialDigits),
+    textGroups: _groups,
   );
 
   /// White, no strip: private, van, pick-up, light goods, agricultural,
@@ -338,21 +342,27 @@ abstract final class JordanPlates {
     panel: const PlatePanel(box: PlateBox(0, 0, 1, 1)),
     noPanel: true,
     slots: <PlateSlot>[
-      ...plateRegister(
+      PlateSlot(
         alphabet: JordanAlphabets.digits,
-        count: 2,
-        left: _Layout.bikeCodeLeft,
-        top: _Layout.bikeCodeTop,
-        width: _Layout.bikePitch,
-        height: _Layout.bikeCellHeight,
+        box: PlateBox(
+          _Layout.bikeCodeLeft,
+          _Layout.bikeCodeTop,
+          2 * _Layout.bikePitch,
+          _Layout.bikeCellHeight,
+        ),
+        length: 2,
+        minLength: 1,
       ),
-      ...plateRegister(
+      PlateSlot(
         alphabet: JordanAlphabets.digits,
-        count: 4,
-        left: _Layout.bikeSerialLeft,
-        top: _Layout.bikeSerialTop,
-        width: _Layout.bikePitch,
-        height: _Layout.bikeCellHeight,
+        box: PlateBox(
+          _Layout.bikeSerialLeft,
+          _Layout.bikeSerialTop,
+          4 * _Layout.bikePitch,
+          _Layout.bikeCellHeight,
+        ),
+        length: 4,
+        minLength: 1,
       ),
     ],
     labels: const <PlateLabel>[
@@ -367,7 +377,7 @@ abstract final class JordanPlates {
         glyphHeight: _Layout.bikeLatinGlyph,
       ),
     ],
-    textGroups: _groups(4),
+    textGroups: _groups,
     borderWidthRatioOverride: _Layout.bikeBorderRatio,
   );
 
