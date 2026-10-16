@@ -2,11 +2,8 @@ import 'package:plate_core/plate_core.dart';
 
 import 'jordan_colors.dart';
 
-/// Jordan's strip, as `plate_core`'s [PlateCountry]. The strip's wording is
-/// printed by labels on the spec; the country only carries its colour. All
-/// share `code: 'jo'`, so tell them apart by [PlateSpec.id].
+/// The strip. Its wording is printed by labels on the spec; the country only carries the colour. All share `code: 'jo'`, so tell them apart by [PlateSpec.id].
 abstract final class JordanCountry {
-  /// White, for a plate with no strip.
   static const PlateCountry plain = PlateCountry(
     code: 'jo',
     captionLines: <String>[],

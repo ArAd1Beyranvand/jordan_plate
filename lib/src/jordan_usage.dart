@@ -1,18 +1,16 @@
 /// One class of vehicle, the code it carries and the design that prints it.
 ///
-/// A usage is data, not a spec: private, van and pick-up all print on the
-/// same white plate and differ only in their code, so [specId] points at the
-/// shared design in `JordanPlates`.
+/// A usage is data, not a spec: private, van and pick-up print on the same white
+/// plate and differ only in code, so [specId] points at the shared design.
 ///
-/// Source: Wikipedia, "Vehicle registration plates of Jordan". The article
-/// gives overlapping ranges (private "1-49", but van 36-37, pick-up 38-40 and
-/// so on); they are kept as published, not reconciled. Army (90) is in the
-/// article but has no artwork, so it has no spec and no entry here.
+/// Source: Wikipedia, "Vehicle registration plates of Jordan". Its overlapping
+/// ranges (private "1-49" against van 36-37, pick-up 38-40) are kept as
+/// published. Army (90) has no artwork, so no spec and no entry.
 class JordanUsage {
   const JordanUsage({
     required this.id,
     required this.english,
-    required this.arabic,
+    this.arabic = '',
     required this.codes,
     required this.specId,
   });
@@ -20,14 +18,12 @@ class JordanUsage {
   final String id;
   final String english;
 
-  /// The Arabic wording the plate prints for this class, or '' when it prints
-  /// none beyond the country name.
+  /// The Arabic wording the plate prints, or '' for none beyond the country name.
   final String arabic;
 
-  /// Every code the class carries. Empty when the article gives none.
+  /// Empty when the article gives none.
   final List<String> codes;
 
-  /// `PlateSpec.id` of the design this class is printed on.
   final String specId;
 
   static List<String> _range(int from, int to) => <String>[
@@ -37,98 +33,84 @@ class JordanUsage {
   static final JordanUsage private = JordanUsage(
     id: 'private',
     english: 'Private',
-    arabic: '',
     codes: <String>[..._range(1, 49), '66', '77', '80', '88'],
     specId: 'jo.private',
   );
   static const JordanUsage van = JordanUsage(
     id: 'van',
     english: 'Van',
-    arabic: '',
     codes: <String>['36', '37'],
     specId: 'jo.private',
   );
   static const JordanUsage pickUp = JordanUsage(
     id: 'pickUp',
     english: 'Pick-up truck',
-    arabic: '',
     codes: <String>['38', '39', '40'],
     specId: 'jo.private',
   );
   static const JordanUsage lightGoods = JordanUsage(
     id: 'lightGoods',
     english: 'Light goods vehicle',
-    arabic: '',
     codes: <String>['41', '42', '43'],
     specId: 'jo.private',
   );
   static const JordanUsage agricultural = JordanUsage(
     id: 'agricultural',
     english: 'Agricultural',
-    arabic: '',
     codes: <String>['44'],
     specId: 'jo.private',
   );
   static const JordanUsage construction = JordanUsage(
     id: 'construction',
     english: 'Construction truck',
-    arabic: '',
     codes: <String>['45'],
     specId: 'jo.private',
   );
   static const JordanUsage customsExemption = JordanUsage(
     id: 'customsExemption',
     english: 'Customs exemption',
-    arabic: '',
     codes: <String>['81'],
     specId: 'jo.private',
   );
   static const JordanUsage motorcycle = JordanUsage(
     id: 'motorcycle',
     english: 'Motorcycle',
-    arabic: '',
     codes: <String>['46', '47'],
     specId: 'jo.motorcycle',
   );
   static const JordanUsage taxi = JordanUsage(
     id: 'taxi',
     english: 'Taxi',
-    arabic: '',
     codes: <String>['50', '51', '52', '53', '54', '55'],
     specId: 'jo.transport',
   );
   static const JordanUsage cityBus = JordanUsage(
     id: 'cityBus',
     english: 'City bus',
-    arabic: '',
     codes: <String>['56', '57'],
     specId: 'jo.transport',
   );
   static const JordanUsage coachBus = JordanUsage(
     id: 'coachBus',
     english: 'Coach bus',
-    arabic: '',
     codes: <String>['58', '59'],
     specId: 'jo.transport',
   );
   static const JordanUsage heavyGoods = JordanUsage(
     id: 'heavyGoods',
     english: 'Heavy goods vehicle',
-    arabic: '',
     codes: <String>['60'],
     specId: 'jo.transport',
   );
   static const JordanUsage rental = JordanUsage(
     id: 'rental',
     english: 'Rental',
-    arabic: '',
     codes: <String>['70'],
     specId: 'jo.rental',
   );
   static const JordanUsage trailer = JordanUsage(
     id: 'trailer',
     english: 'Trailer',
-    arabic: '',
     codes: <String>['71'],
     specId: 'jo.trailer',
   );

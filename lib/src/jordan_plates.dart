@@ -7,49 +7,38 @@ import 'jordan_country.dart';
 
 /// Where the ink sits on the 520 x 110 plate, in plate coordinates.
 ///
-/// Measured by normalising each plate rectangle of the Wikipedia artwork to
-/// 520 x 110 (`.plateref/jordan`, `m.py`/`q.py`/`r.py`). Two artwork
-/// generations disagree and the newer one is used: the old 1000x221 files put
-/// the strip's edge at x=112.6 and the digits 52.3 apart; the newer files
-/// (aspect 4.72, matching the article's 520 x 110) and the photographs of a
-/// green and a yellow plate both put it at x=83.5 and the digits 56 apart.
+/// Measured by normalising each artwork plate rectangle to 520 x 110
+/// (`.plateref/jordan`). Two artwork generations disagree and the newer is used:
+/// the old files put the strip's edge at x=112.6 and the digits 52.3 apart; the
+/// newer files and the photographs put them at x=83.5 and 56 apart.
 ///
-/// The one thing the engine cannot reach is digit size. Artwork ink is 75 units
-/// tall (y 17.4 to 92.2); a slot paints about 0.55 of its box, and the box is
-/// capped at the 110-unit canvas, so characters come out near 56 units tall,
-/// about 75% of the reference. [glyphStyle]'s 0.72 is shared by every country,
-/// so it stays.
+/// Digit size is capped: artwork ink is 75 tall, a slot paints ~0.55 of its box,
+/// and the box is capped at the 110 canvas, so characters come out ~75% of the
+/// reference. [glyphStyle]'s 0.72 is shared by every country, so it stays.
 abstract final class _Layout {
   static const double width = 520;
   static const double height = 110;
 
-  /// Right edge of the coloured strip. 83.0-83.7 across five files.
   static const double stripEnd = 83.5;
 
-  /// Cells are 56 apart: code ink centres 116.5 and 172.4 (GV artwork),
-  /// 113 and 170 (green photograph); serial ink centres 312 to 483 (photograph).
+  /// Cells are 56 apart (code ink centres 116.5 and 172.4; serial 312 to 483).
   static const double pitch = 56;
 
-  /// Two code cells, centres 114 and 170.
   static const double codeLeft = 86;
 
   /// The dash, 14.4 wide, ink at y 50.5-61.5, x 206.0-220.4 (GV/AQ/CD artwork)
   /// and 207.7-219.9 (white artwork).
   static const PlateBox dash = PlateBox(206, 50.5, 14.4, 11);
 
-  /// A serial field of five cells ending at 511, so the last centre is 483 as on the
-  /// photographed plate. A shorter serial is centred in its box.
+  /// Five cells ending at 511, so the last centre is 483; a shorter serial is centred in its box.
   static const double serialRight = 511;
   static const int serialMax = 5;
 
-  /// Characters fill the canvas; see the class note on why not more.
   static const double cellTop = 0;
   static const double cellHeight = height;
 
-  /// The strip's wording is centred on x=43 (ink spans 5.0-80.7 in a strip
-  /// 83.5 wide); the boxes sit 1.8 left of that because the substitute font
-  /// measures 1.8 right of the artwork.
-  /// الأردن, ink y 8.7-47.9.
+  /// The strip's wording is centred on x=43; the boxes sit 1.8 left because the
+  /// substitute font measures 1.8 right of the artwork. الأردن, ink y 8.7-47.9.
   static const PlateBox arabicName = PlateBox(3.2, 8.5, 76, 40);
   static const double arabicNameGlyph = 36;
 
@@ -57,12 +46,10 @@ abstract final class _Layout {
   static const PlateBox caption = PlateBox(3.2, 52, 76, 19);
   static const double captionGlyph = 15;
 
-  /// Caption glyph height for a short Arabic word (موقت), which can be larger
-  /// than the long ones (مجلس الوزراء) that must fit 76 units.
+  /// Caption glyph for a short Arabic word, larger than the long ones that must fit 76 units.
   static const double captionShortGlyph = 20;
 
-  /// Caption glyph height for Latin capitals (TRL): the reference prints them
-  /// at JORDAN's size, 21.5 against 18.7.
+  /// Caption glyph for Latin capitals, which the reference prints at JORDAN's size.
   static const double captionLatinGlyph = 26;
 
   /// JORDAN, caps ink y 77.0-95.7 (18.7 tall).
@@ -81,7 +68,7 @@ abstract final class _Layout {
   static const double bikeHeight = 155;
   static const double bikeBorderRatio = 0.02;
 
-  /// Cells 38.6 apart; "1235" ink x 85-209, "46" ink x 102-172 (reference); the golden agrees to 1.
+  /// Cells 38.6 apart.
   static const double bikePitch = 38.6;
   static const double bikeCodeLeft = 98.3;
   static const double bikeSerialLeft = 58.2;
@@ -98,20 +85,15 @@ abstract final class _Layout {
   static const double bikeLatinGlyph = 20;
 }
 
-/// Jordan's plates. Fifteen designs, but one geometry: every plate is a
-/// two-cell code, a dash and up to five serial digits on the 520 x 110 face,
-/// with a coloured strip on the left or none. Strip colour is the
-/// [PlateSpec.country]; the wording on it and the code's alphabet are the
-/// builder's parameters.
-///
-/// Only the current (2007) series is implemented. The 335 x 155 plates the
-/// article marks "outdated" are not.
+/// Fifteen designs, one geometry: a two-cell code, a dash and up to five serial
+/// digits on the 520 x 110 face, with a coloured strip or none. Strip colour is
+/// the [PlateSpec.country]; the wording and the code's alphabet are builder
+/// parameters. Only the current (2007) series is implemented.
 abstract final class JordanPlates {
-  static const PlateSection _stripBackground =
-      PlateSection.columns(<PlatePart>[
-        PlatePart(PlateSection.fill(PlateFill.panel), end: _Layout.stripEnd),
-        PlatePart(PlateSection.plain),
-      ]);
+  static const PlateSection _stripBackground = PlateSection.columns(<PlatePart>[
+    PlatePart(PlateSection.fill(PlateFill.panel), end: _Layout.stripEnd),
+    PlatePart(PlateSection.plain),
+  ]);
 
   static const PlatePanel _stripPanel = PlatePanel(
     box: PlateBox(0, 0, _Layout.stripEnd, _Layout.height),
@@ -177,9 +159,6 @@ abstract final class JordanPlates {
     PlateTextGroup(<int>[1], prefix: '-', key: 'serial'),
   ];
 
-  /// The shared plate. [country] is the strip (or [JordanCountry.plain] for
-  /// none); [labels] is the wording on the left; [code] is the code's
-  /// alphabet.
   static PlateSpec _plate({
     required String id,
     required PlateCountry country,
@@ -216,14 +195,12 @@ abstract final class JordanPlates {
     labels: _nameLabels(ink: JordanColors.white),
   );
 
-  /// Green strip, yellow wording.
   static final PlateSpec rental = _plate(
     id: 'jo.rental',
     country: JordanCountry.green,
     labels: _nameLabels(ink: JordanColors.rentalInk),
   );
 
-  /// Yellow strip captioned TRL.
   static final PlateSpec trailer = _plate(
     id: 'jo.trailer',
     country: JordanCountry.yellow,
@@ -234,7 +211,6 @@ abstract final class JordanPlates {
     ),
   );
 
-  /// Yellow strip captioned موقت.
   static final PlateSpec temporary = _plate(
     id: 'jo.temporary',
     country: JordanCountry.yellow,
@@ -381,7 +357,6 @@ abstract final class JordanPlates {
     borderWidthRatioOverride: _Layout.bikeBorderRatio,
   );
 
-  /// Every design, in the order the article lists them.
   static final List<PlateSpec> all = <PlateSpec>[
     private,
     motorcycle,
