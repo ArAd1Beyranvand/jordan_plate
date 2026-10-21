@@ -6,10 +6,11 @@
 /// `PlateCountry`; usage classes are data in `JordanUsage`.
 library;
 
-export 'src/jordan_colors.dart';
-export 'src/jordan_usage.dart';
-export 'src/jordan_country.dart';
-export 'src/jordan_themes.dart';
-export 'src/jordan_plates.dart';
-export 'src/jordan_validators.dart';
 export 'package:plate_alphabet/plate_alphabet.dart' show JordanAlphabets;
+
+export 'src/jordan_colors.dart';
+export 'src/jordan_country.dart';
+export 'src/jordan_plates.dart';
+export 'src/jordan_themes.dart';
+export 'src/jordan_usage.dart';
+export 'src/jordan_validators.dart';

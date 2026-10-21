@@ -85,10 +85,8 @@ abstract final class _Layout {
   static const double bikeLatinGlyph = 20;
 }
 
-/// Fifteen designs, one geometry: a two-cell code, a dash and up to five serial
-/// digits on the 520 x 110 face, with a coloured strip or none. Strip colour is
-/// the [PlateSpec.country]; the wording and the code's alphabet are builder
-/// parameters. Only the current (2007) series is implemented.
+/// Strip colour is the [PlateSpec.country]; the wording and the code's alphabet
+/// are builder parameters. Only the current (2007) series is implemented.
 abstract final class JordanPlates {
   static const PlateSection _stripBackground = PlateSection.columns(<PlatePart>[
     PlatePart(PlateSection.fill(PlateFill.panel), end: _Layout.stripEnd),
