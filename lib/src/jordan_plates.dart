@@ -110,12 +110,7 @@ abstract final class JordanPlates {
       color: ink,
     ),
     if (caption != null)
-      PlateLabel(
-        text: caption,
-        box: _Layout.caption,
-        glyphHeight: captionGlyph,
-        color: ink,
-      ),
+      PlateLabel(text: caption, box: _Layout.caption, glyphHeight: captionGlyph, color: ink),
     PlateLabel(
       text: 'JORDAN',
       box: _Layout.latinName,
@@ -130,12 +125,7 @@ abstract final class JordanPlates {
   static List<PlateSlot> _slots(PlateAlphabet code) => <PlateSlot>[
     PlateSlot(
       alphabet: code,
-      box: const PlateBox(
-        _Layout.codeLeft,
-        _Layout.cellTop,
-        2 * _Layout.pitch,
-        _Layout.cellHeight,
-      ),
+      box: const PlateBox(_Layout.codeLeft, _Layout.cellTop, 2 * _Layout.pitch, _Layout.cellHeight),
       length: 2,
       minLength: code == JordanAlphabets.digits ? 1 : 2,
     ),
@@ -202,21 +192,13 @@ abstract final class JordanPlates {
   static final PlateSpec trailer = _plate(
     id: 'jo.trailer',
     country: JordanCountry.yellow,
-    labels: _nameLabels(
-      ink: null,
-      caption: 'TRL',
-      captionGlyph: _Layout.captionLatinGlyph,
-    ),
+    labels: _nameLabels(ink: null, caption: 'TRL', captionGlyph: _Layout.captionLatinGlyph),
   );
 
   static final PlateSpec temporary = _plate(
     id: 'jo.temporary',
     country: JordanCountry.yellow,
-    labels: _nameLabels(
-      ink: null,
-      caption: 'موقت',
-      captionGlyph: _Layout.captionShortGlyph,
-    ),
+    labels: _nameLabels(ink: null, caption: 'موقت', captionGlyph: _Layout.captionShortGlyph),
   );
 
   static PlateSpec _letters({
@@ -268,44 +250,21 @@ abstract final class JordanPlates {
     caption: 'دبلوماسي',
   );
 
-  static PlateSpec _service({
-    required String id,
-    required String top,
-    required String bottom,
-  }) => _plate(
-    id: id,
-    country: JordanCountry.plain,
-    strip: false,
-    labels: <PlateLabel>[
-      PlateLabel(
-        text: top,
-        box: _Layout.serviceTop,
-        glyphHeight: _Layout.serviceGlyph,
-      ),
-      PlateLabel(
-        text: bottom,
-        box: _Layout.serviceBottom,
-        glyphHeight: _Layout.serviceGlyph,
-      ),
-    ],
-  );
+  static PlateSpec _service({required String id, required String top, required String bottom}) =>
+      _plate(
+        id: id,
+        country: JordanCountry.plain,
+        strip: false,
+        labels: <PlateLabel>[
+          PlateLabel(text: top, box: _Layout.serviceTop, glyphHeight: _Layout.serviceGlyph),
+          PlateLabel(text: bottom, box: _Layout.serviceBottom, glyphHeight: _Layout.serviceGlyph),
+        ],
+      );
 
   /// The country name gives way to the service's own two lines.
-  static final PlateSpec police = _service(
-    id: 'jo.police',
-    top: 'الامن',
-    bottom: 'العام',
-  );
-  static final PlateSpec ambulance = _service(
-    id: 'jo.ambulance',
-    top: 'الدفاع',
-    bottom: 'المدني',
-  );
-  static final PlateSpec gendarmerie = _service(
-    id: 'jo.gendarmerie',
-    top: 'قوات',
-    bottom: 'الدرك',
-  );
+  static final PlateSpec police = _service(id: 'jo.police', top: 'الامن', bottom: 'العام');
+  static final PlateSpec ambulance = _service(id: 'jo.ambulance', top: 'الدفاع', bottom: 'المدني');
+  static final PlateSpec gendarmerie = _service(id: 'jo.gendarmerie', top: 'قوات', bottom: 'الدرك');
 
   /// Two rows: the code over the serial, on a near-square plate.
   static final PlateSpec motorcycle = PlateSpec(
@@ -340,16 +299,8 @@ abstract final class JordanPlates {
       ),
     ],
     labels: const <PlateLabel>[
-      PlateLabel(
-        text: 'الاردن',
-        box: _Layout.bikeArabicName,
-        glyphHeight: _Layout.bikeArabicGlyph,
-      ),
-      PlateLabel(
-        text: 'JORDAN',
-        box: _Layout.bikeLatinName,
-        glyphHeight: _Layout.bikeLatinGlyph,
-      ),
+      PlateLabel(text: 'الاردن', box: _Layout.bikeArabicName, glyphHeight: _Layout.bikeArabicGlyph),
+      PlateLabel(text: 'JORDAN', box: _Layout.bikeLatinName, glyphHeight: _Layout.bikeLatinGlyph),
     ],
     textGroups: _groups,
     borderWidthRatioOverride: _Layout.bikeBorderRatio,
@@ -374,6 +325,5 @@ abstract final class JordanPlates {
   ];
 
   /// The design whose `PlateSpec.id` is [specId] (see `JordanUsage.specId`).
-  static PlateSpec forSpecId(String specId) =>
-      all.firstWhere((s) => s.id == specId);
+  static PlateSpec forSpecId(String specId) => all.firstWhere((s) => s.id == specId);
 }

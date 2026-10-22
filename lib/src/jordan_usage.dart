@@ -26,9 +26,7 @@ class JordanUsage {
 
   final String specId;
 
-  static List<String> _range(int from, int to) => <String>[
-    for (var i = from; i <= to; i++) '$i',
-  ];
+  static List<String> _range(int from, int to) => <String>[for (var i = from; i <= to; i++) '$i'];
 
   static final JordanUsage private = JordanUsage(
     id: 'private',

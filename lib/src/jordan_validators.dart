@@ -15,8 +15,7 @@ class JordanValidator extends GatedPlateValidator {
   String get gateGroup => 'serial';
 
   static const String reasonCodeMissing = 'A plate starts with a code.';
-  static const String reasonCodeUnknown =
-      'That code is not issued on this plate.';
+  static const String reasonCodeUnknown = 'That code is not issued on this plate.';
   static const String reasonSerialNotNumeric = 'The number is digits only.';
   static const String reasonSerialLength = 'The number is one to five digits.';
 

@@ -39,11 +39,7 @@ void main() {
   test('validator', () {
     expect(judge(JordanPlates.private, ['21', '30000']).isValid, isTrue);
     expect(judge(JordanPlates.private, ['21', '7']).isValid, isTrue);
-    expect(
-      judge(JordanPlates.private, [null, '12345']).isValid,
-      isFalse,
-      reason: 'no code',
-    );
+    expect(judge(JordanPlates.private, [null, '12345']).isValid, isFalse, reason: 'no code');
     expect(
       judge(JordanPlates.private, ['60', '1']).isValid,
       isFalse,
