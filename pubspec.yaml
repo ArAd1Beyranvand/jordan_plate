@@ -1,7 +1,7 @@
 name: jordan_plate
 description: "Jordan's licence plates for the plate_core library: the 520 x 110 plate in white, green, yellow and red strips, the two-line motorcycle plate and the police plates, with an advisory validator."
 version: 0.1.0
-publish_to: none
+repository: https://github.com/ArAd1Beyranvand/jordan_plate
 resolution: workspace
 
 environment:
