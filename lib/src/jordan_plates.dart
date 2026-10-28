@@ -102,6 +102,7 @@ abstract final class JordanPlates {
     String arabic = 'الاردن',
     String? caption,
     double captionGlyph = _Layout.captionGlyph,
+    PlateLabelResolver? resolve,
   }) => <PlateLabel>[
     PlateLabel(
       text: arabic,
@@ -110,7 +111,13 @@ abstract final class JordanPlates {
       color: ink,
     ),
     if (caption != null)
-      PlateLabel(text: caption, box: _Layout.caption, glyphHeight: captionGlyph, color: ink),
+      PlateLabel(
+        text: caption,
+        box: _Layout.caption,
+        glyphHeight: captionGlyph,
+        color: ink,
+        resolve: resolve,
+      ),
     PlateLabel(
       text: 'JORDAN',
       box: _Layout.latinName,
@@ -201,47 +208,38 @@ abstract final class JordanPlates {
     labels: _nameLabels(ink: null, caption: 'موقت', captionGlyph: _Layout.captionShortGlyph),
   );
 
+  static const Map<String, String> _captions = <String, String>{
+    'PM': 'مجلس الوزراء',
+    'PR': 'مجلس النواب',
+    'SN': 'مجلس النواب',
+    'JC': 'مجلس قضائي',
+    'GV': 'حكومي',
+    'AQ': 'سلطة العقبة',
+  };
+
+  static String? _caption(String Function(String key) group) => _captions[group('code')];
+
   static PlateSpec _letters({
     required String id,
     required PlateCountry country,
     required Color ink,
     required String caption,
+    PlateLabelResolver? resolve,
   }) => _plate(
     id: id,
     country: country,
     code: JordanAlphabets.letters,
-    labels: _nameLabels(ink: ink, arabic: 'الأردن', caption: caption),
+    labels: _nameLabels(ink: ink, arabic: 'الأردن', caption: caption, resolve: resolve),
   );
 
-  static final PlateSpec executive = _letters(
-    id: 'jo.executive',
-    country: JordanCountry.red,
-    ink: JordanColors.white,
-    caption: 'مجلس الوزراء',
-  );
-  static final PlateSpec legislative = _letters(
-    id: 'jo.legislative',
-    country: JordanCountry.red,
-    ink: JordanColors.white,
-    caption: 'مجلس النواب',
-  );
-  static final PlateSpec judicial = _letters(
-    id: 'jo.judicial',
-    country: JordanCountry.red,
-    ink: JordanColors.white,
-    caption: 'مجلس قضائي',
-  );
+  /// Government, parliament, judiciary and Aqaba: the code (`PM`, `PR`/`SN`,
+  /// `JC`, `GV`, `AQ`) picks the caption.
   static final PlateSpec governmental = _letters(
     id: 'jo.governmental',
     country: JordanCountry.red,
     ink: JordanColors.white,
     caption: 'حكومي',
-  );
-  static final PlateSpec aqaba = _letters(
-    id: 'jo.aqaba',
-    country: JordanCountry.red,
-    ink: JordanColors.white,
-    caption: 'سلطة العقبة',
+    resolve: _caption,
   );
   static final PlateSpec diplomatic = _letters(
     id: 'jo.diplomatic',
@@ -313,11 +311,7 @@ abstract final class JordanPlates {
     rental,
     trailer,
     temporary,
-    executive,
-    legislative,
-    judicial,
     governmental,
-    aqaba,
     diplomatic,
     police,
     ambulance,

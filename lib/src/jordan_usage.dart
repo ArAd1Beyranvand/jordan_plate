@@ -126,21 +126,21 @@ class JordanUsage {
     english: 'Executive branch',
     arabic: 'مجلس الوزراء',
     codes: <String>['PM'],
-    specId: 'jo.executive',
+    specId: 'jo.governmental',
   );
   static const JordanUsage legislative = JordanUsage(
     id: 'legislative',
     english: 'Legislative branch',
     arabic: 'مجلس النواب',
     codes: <String>['PR', 'SN'],
-    specId: 'jo.legislative',
+    specId: 'jo.governmental',
   );
   static const JordanUsage judicial = JordanUsage(
     id: 'judicial',
     english: 'Judicial branch',
     arabic: 'مجلس قضائي',
     codes: <String>['JC'],
-    specId: 'jo.judicial',
+    specId: 'jo.governmental',
   );
   static const JordanUsage governmental = JordanUsage(
     id: 'governmental',
@@ -154,7 +154,7 @@ class JordanUsage {
     english: 'Aqaba Free Trade Zone',
     arabic: 'سلطة العقبة',
     codes: <String>['AQ'],
-    specId: 'jo.aqaba',
+    specId: 'jo.governmental',
   );
   static const JordanUsage diplomatic = JordanUsage(
     id: 'diplomatic',
