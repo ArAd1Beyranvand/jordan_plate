@@ -57,7 +57,11 @@ void main() {
                 height: 1040 * spec.canvasHeight / spec.canvasWidth,
                 child: PlateThemeScope(
                   theme: theme,
-                  child: PlateView(controller: controller, theme: theme, country: spec.country),
+                  child: PlateView(
+                    controller: controller,
+                    theme: theme,
+                    country: spec.country,
+                  ),
                 ),
               ),
             ),
@@ -65,7 +69,10 @@ void main() {
         ),
       );
       await tester.pumpAndSettle();
-      await expectLater(find.byType(PlateView), matchesGoldenFile('goldens/jo_${e.key}.png'));
+      await expectLater(
+        find.byType(PlateView),
+        matchesGoldenFile('goldens/jo_${e.key}.png'),
+      );
       await tester.pumpWidget(const SizedBox.shrink());
       controller.dispose();
     });
