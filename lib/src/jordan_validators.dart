@@ -2,6 +2,9 @@ import 'package:plate_core/plate_core.dart';
 
 import 'jordan_usage.dart';
 
+// TODO(py): [D4-code] hand-port; reason strings are the contract, keep them byte-identical.
+// TODO(ts): [D4-code] hand-port; reason strings are the contract, keep them byte-identical.
+// TODO(kt): [D4-code] hand-port; reason strings are the contract, keep them byte-identical.
 /// Judges a Jordanian plate. Reports, never throws, never bars a keystroke.
 ///
 /// Checks that the serial is one to five digits and, where the article names
