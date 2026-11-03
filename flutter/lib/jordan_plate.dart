@@ -6,9 +6,6 @@
 /// `PlateCountry`; usage classes are data in `JordanUsage`.
 library;
 
-// TODO(py): [D5] one module `plates.countries.jordan`; assets via importlib.resources.
-// TODO(ts): [D5] one subpath export `./countries/jordan`; tree-shakable.
-// TODO(kt): [D5] package `countries.jordan` in the countries module.
 export 'package:plate_alphabet/plate_alphabet.dart' show JordanAlphabets;
 
 export 'src/jordan_colors.dart';

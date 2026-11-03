@@ -2,9 +2,6 @@ import 'package:plate_core/plate_core.dart';
 
 import 'jordan_usage.dart';
 
-// TODO(py): [D4-code] hand-port; reason strings are the contract, keep them byte-identical.
-// TODO(ts): [D4-code] hand-port; reason strings are the contract, keep them byte-identical.
-// TODO(kt): [D4-code] hand-port; reason strings are the contract, keep them byte-identical.
 /// Judges a Jordanian plate. Reports, never throws, never bars a keystroke.
 ///
 /// Checks that the serial is one to five digits and, where the article names
@@ -12,10 +9,7 @@ import 'jordan_usage.dart';
 /// allocation: the article gives only that the normal series had reached
 /// 21-30000 by 2013 and that private prefixes run past 49.
 class JordanValidator extends GatedPlateValidator {
-  const JordanValidator();
-
-  @override
-  String get gateGroup => 'serial';
+  const JordanValidator() : super('serial');
 
   static const String reasonCodeMissing = 'A plate starts with a code.';
   static const String reasonCodeUnknown =

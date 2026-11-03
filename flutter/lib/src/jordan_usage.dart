@@ -15,8 +15,7 @@ class JordanUsage {
     required this.specId,
   });
 
-  final String id;
-  final String english;
+  final String id, english;
 
   /// The Arabic wording the plate prints, or '' for none beyond the country name.
   final String arabic;

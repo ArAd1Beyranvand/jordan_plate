@@ -16,7 +16,6 @@ abstract final class JordanThemes {
   static const PlateTheme standard = PlateTheme.monochrome(
     field: JordanColors.white,
     ink: JordanColors.black,
-    inactive: JordanColors.inactive,
     borderWidthRatio: borderWidthRatio,
     plateRadiusRatio: plateRadiusRatio,
   );

@@ -16,8 +16,7 @@ import 'jordan_country.dart';
 /// and the box is capped at the 110 canvas, so characters come out ~75% of the
 /// reference. [glyphStyle]'s 0.72 is shared by every country, so it stays.
 abstract final class _Layout {
-  static const double width = 520;
-  static const double height = 110;
+  static const double width = 520, height = 110;
 
   static const double stripEnd = 83.5;
 
@@ -34,8 +33,7 @@ abstract final class _Layout {
   static const double serialRight = 511;
   static const int serialMax = 5;
 
-  static const double cellTop = 0;
-  static const double cellHeight = height;
+  static const double cellTop = 0, cellHeight = height;
 
   /// The strip's wording is centred on x=43; the boxes sit 1.8 left because the
   /// substitute font measures 1.8 right of the artwork. الأردن, ink y 8.7-47.9.
@@ -64,25 +62,20 @@ abstract final class _Layout {
 
   // The motorcycle plate has no stated size; 250 x 155 is the artwork's own
   // aspect (1.63 of 635x390), so those numbers are normalised to it.
-  static const double bikeWidth = 250;
-  static const double bikeHeight = 155;
-  static const double bikeBorderRatio = 0.02;
+  static const double bikeWidth = 250, bikeHeight = 155, bikeBorderRatio = 0.02;
 
   /// Cells 38.6 apart.
-  static const double bikePitch = 38.6;
-  static const double bikeCodeLeft = 98.3;
+  static const double bikePitch = 38.6, bikeCodeLeft = 98.3;
   static const double bikeSerialLeft = 58.2;
 
   /// Code ink y about 17-69, serial ink y 87.9-137.9.
-  static const double bikeCodeTop = 1;
-  static const double bikeSerialTop = 70.9;
+  static const double bikeCodeTop = 1, bikeSerialTop = 70.9;
   static const double bikeCellHeight = 84;
 
   /// الاردن ink y 13.0-34.4, JORDAN y 42.4-57.9, both centred near x=43.
   static const PlateBox bikeArabicName = PlateBox(6, 11.1, 74, 21.4);
   static const PlateBox bikeLatinName = PlateBox(6, 39, 74, 20);
-  static const double bikeArabicGlyph = 26;
-  static const double bikeLatinGlyph = 20;
+  static const double bikeArabicGlyph = 26, bikeLatinGlyph = 20;
 }
 
 /// Strip colour is the [PlateSpec.country]; the wording and the code's alphabet
@@ -230,9 +223,6 @@ abstract final class JordanPlates {
     'AQ': 'سلطة العقبة',
   };
 
-  // TODO(py): [D4-table] lookup table: becomes a dict in the export, no code.
-  // TODO(ts): [D4-table] lookup table: becomes data in the export, no code.
-  // TODO(kt): [D4-table] lookup table: becomes a map in the export, no code.
   static String? _caption(String Function(String key) group) =>
       _captions[group('code')];
 

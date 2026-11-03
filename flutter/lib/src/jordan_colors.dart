@@ -18,6 +18,4 @@ abstract final class JordanColors {
 
   /// Government, parliament, judicial and Aqaba strip; modal of five artwork files.
   static const Color red = Color(0xFFE42B2B);
-
-  static const Color inactive = Color(0xFFB0B0B0);
 }
